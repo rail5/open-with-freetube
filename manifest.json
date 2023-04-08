@@ -1,0 +1,29 @@
+{
+
+  "manifest_version": 2,
+  "name": "Open with FreeTube",
+  "description": "Adds a context menu item to open YouTube links in FreeTube",
+  "author": "rail5",
+  "version": "1.0",
+  "browser_specific_settings": {
+    "gecko": {
+      "strict_min_version": "60.0a1",
+      "id": "open-with-freetube@rail5.org"
+    }
+  },
+  "icons": {
+    "48": "icon/48.png",
+    "128": "icon/128.png",
+    "256": "icon/256.png"
+  },
+
+  "background": {
+    "scripts": ["src/main.js"]
+  },
+  
+  "permissions": [
+    "menus",
+    "<all_urls>"
+  ]
+
+}
