@@ -4,7 +4,7 @@
   "name": "Open with FreeTube",
   "description": "Adds a context menu item to open YouTube links in FreeTube",
   "author": "rail5",
-  "version": "1.0",
+  "version": "1.2",
   "browser_specific_settings": {
     "gecko": {
       "strict_min_version": "60.0a1",

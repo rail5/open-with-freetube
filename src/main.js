@@ -2,10 +2,12 @@
 
 const itemId = "open-with-freetube";
 
+let menuItemCurrentlyExists = false;
+
 browser.menus.onClicked.addListener((info, tab) => {
 	if (info.menuItemId === itemId) {
-		// Append 'freetube:' to the beginning of the link & trim everything before "/watch?v="
-		let freetubelink = "freetube:" + info.linkUrl.slice(info.linkUrl.indexOf("/watch?v="));
+		// Append 'freetube:' to the beginning of the link
+		let freetubelink = "freetube:" + info.linkUrl;
 		// Open the new link
 		browser.tabs.update(tab.id, {
 			url: freetubelink
@@ -14,17 +16,23 @@ browser.menus.onClicked.addListener((info, tab) => {
 });
 
 function createMenuItem() {
-	browser.menus.create({
-		id: itemId,
-		title: "Open with FreeTube",
-		contexts: ["link"]
-	});
-	browser.menus.refresh();
+	if (!menuItemCurrentlyExists) {
+		browser.menus.create({
+			id: itemId,
+			title: "Open with FreeTube",
+			contexts: ["link"]
+		});
+		browser.menus.refresh();
+		menuItemCurrentlyExists = true;
+	}
 }
 
 function destroyMenuItem() {
-	browser.menus.remove(itemId);
-	browser.menus.refresh();
+	if (menuItemCurrentlyExists) {
+		browser.menus.remove(itemId);
+		browser.menus.refresh();
+		menuItemCurrentlyExists = false;
+	}
 }
 
 browser.menus.onShown.addListener(info => {
